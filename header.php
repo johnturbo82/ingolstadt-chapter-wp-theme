@@ -55,7 +55,7 @@
     <div class="navigation container">
         <div class="content">
             <a class="homebutton" href="<?php echo get_home_url() ?>">
-                <img class="small_logo" src="<?php echo get_template_directory_uri(); ?>/images/Ingolstadt_Chapter.svg" alt="Ingolstadt Chapter" />
+                <img class="small_logo" src="<?php echo get_template_directory_uri(); ?>/images/logo/Ingolstadt_Chapter.svg" alt="Ingolstadt Chapter" />
             </a>
             <div class="current_page_title"><?php the_title(); ?></div>
             <input id="menu_toggle" type="checkbox"></input>

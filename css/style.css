@@ -313,17 +313,18 @@ Header
     height: calc(100vh - 70px);
     background-color: var(--grey-light);
     z-index: 1;
-    background-image: url(../images/InChap_riding.webp);
+    background-image: url(../images/header/InChap_riding.webp);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 .header.container {
-    height: 400px;
+    height: 30vw;
+    min-height: 400px;
     background-color: var(--grey-light);
     z-index: 1;
-    background-image: url(../images/harley_davidson.jpg);
+    background-image: url(../images/header/harley_davidson.webp);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -331,23 +332,23 @@ Header
 }
 
 .header.container.ueber-uns {
-    background-image: url(../images/HD-Ingolstadt.webp);
+    background-image: url(../images/header/HD-Ingolstadt.webp);
 }
 
 .header.container.chapter {
-    background-image: url(../images/chapter.webp);
+    background-image: url(../images/header/chapter.webp);
 }
 
 .header.container.events {
-    background-image: url(../images/events.webp);
+    background-image: url(../images/header/events.webp);
 }
 
 .header.container.dokumente {
-    background-image: url(../images/bikini.webp);
+    background-image: url(../images/header/bikini.webp);
 }
 
 .header.container.kontakt {
-    background-image: url(../images/see.webp);
+    background-image: url(../images/header/dealer_store.webp);
 }
 
 .header.container.first-page .content {
@@ -473,17 +474,17 @@ Content
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 40vh;
+    height: 30vw;
     border-bottom: 8px solid var(--chapter-gold);
-    background-image: url(../images/HD-Ingolstadt.webp);
+    background-image: url(../images/header/HD-Ingolstadt.webp);
 }
 
 .maincontent.container .wide_content.aktuelle-events {
-    background-image: url(../images/chapter.webp);
+    background-image: url(../images/header/chapter.webp);
 }
 
 .maincontent.container .wide_content.unsere-philosophie {
-    background-image: url(../images/kutten.webp);
+    background-image: url(../images/header/kutten.webp);
 }
 
 /**************
@@ -510,15 +511,15 @@ Footer
 }
 
 .prefooter.container .content .backpatch.backpatch_old {
-    background-image: url(../images/Backpatch_old.svg);
+    background-image: url(../images/logo/Backpatch_old.svg);
 }
 
 .prefooter.container .content .backpatch.backpatch_new {
-    background-image: url(../images/Backpatch_new.svg);
+    background-image: url(../images/logo/Backpatch_new.svg);
 }
 
 .prefooter.container .content .backpatch.backpatch_current {
-    background-image: url(../images/Backpatch.svg);
+    background-image: url(../images/logo/Backpatch.svg);
 }
 
 .footer.container {

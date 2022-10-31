@@ -12,7 +12,7 @@ get_header(); ?>
     </div>
     <div class="content">
         <div class="title">
-            <a href="<?php echo get_home_url() ?>"><img class="logo" src="<?php echo get_template_directory_uri(); ?>/images/Ingolstadt_Chapter.svg" alt="Ingolstadt Chapter" /></a>
+            <a href="<?php echo get_home_url() ?>"><img class="logo" src="<?php echo get_template_directory_uri(); ?>/images/logo/Ingolstadt_Chapter.svg" alt="Ingolstadt Chapter" /></a>
             <h1><?php echo get_bloginfo() ?></h1>
             <h2><?php echo get_bloginfo('description') ?></h2>
         </div>
