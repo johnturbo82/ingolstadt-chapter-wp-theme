@@ -474,7 +474,7 @@ Content
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 30vw;
+    height: 35vw;
     border-bottom: 8px solid var(--chapter-gold);
     background-image: url(../images/header/HD-Ingolstadt.webp);
 }
