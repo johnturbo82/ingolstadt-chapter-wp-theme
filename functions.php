@@ -39,20 +39,24 @@ function member($atts, $content = null)
     }
     $name = trim($content);
     $output = '';
-    $output.= '<div class="member">';
-    $output.= '<div class="name">';
-    $output.= '<h3>' . $name . '</h3>';
+    if (isset($atts['id'])) {
+        $output .= '<div id="' .  $atts['id'] . '" class="member">';
+    } else {
+        $output .= '<div class="member">';
+    }
+    $output .= '<div class="name">';
+    $output .= '<h3>' . $name . '</h3>';
     if (isset($atts['mail'])) {
-        $output.= '<p><a href="mailto:' . $atts['mail'] . '">' . $atts['mail'] . '</a></p>';
+        $output .= '<p><a href="mailto:' . $atts['mail'] . '">' . $atts['mail'] . '</a></p>';
     }
     foreach ($officers as $officer) {
-        $output.= '<div class="patch ' . trim($officer) . '"></div>';
+        $output .= '<div class="patch ' . trim($officer) . '"></div>';
     }
-    $output.= '</div>';
-    $output.= '<div class="image">';
-    $output.= '<img src="' . $atts['image'] . '" alt="' . $name . '"/>';
-    $output.= '</div>';
-    $output.= '</div>';
+    $output .= '</div>';
+    $output .= '<div class="image">';
+    $output .= '<img src="' . $atts['image'] . '" alt="' . $name . '"/>';
+    $output .= '</div>';
+    $output .= '</div>';
     return $output;
 }
 add_shortcode("member", "member");

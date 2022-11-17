@@ -37,18 +37,6 @@ Vars
 /**************
 General tags
 **************/
-:root {
-    --grey-dark: #101010;
-    --grey-darkmid: #2c3135;
-    --grey-mid: #bbbbbb;
-    --grey-light: #eeeceb;
-    --chapter-red: #ee252b;
-    --chapter-blue: #2383ba;
-    --chapter-gold: #b3a154;
-    --text-highlight: #fff;
-    --text-black: #000;
-}
-
 * {
     box-sizing: border-box;
 }
@@ -474,7 +462,7 @@ Content
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 35vw;
+    height: 30vw;
     border-bottom: 8px solid var(--chapter-gold);
     background-image: url(../images/header/HD-Ingolstadt.webp);
 }
@@ -485,6 +473,36 @@ Content
 
 .maincontent.container .wide_content.unsere-philosophie {
     background-image: url(../images/header/kutten.webp);
+}
+
+.maincontent.container .content .news {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    gap: 15px;
+    width: 100%;
+}
+
+.maincontent.container .content .news_article {
+    flex: 1;
+    display: inline-block;
+    background-color: var(--grey-darkmid);
+    padding: 12px;
+    border: 3px solid var(--chapter-blue);
+    text-decoration: none;
+    color: inherit;
+}
+
+.maincontent.container .content .news_article h3 {
+    margin-top: 0;
+}
+
+.maincontent.container .content .news_article p:last-of-type {
+    margin-bottom: 0;
+}
+
+.maincontent.container .content .news_article span.date {
+    font-size: 85%;
 }
 
 /**************
@@ -678,8 +696,20 @@ Responsiveness
         padding-left: 0;
     }
 
+    .maincontent.container .content .news {
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+
     .prefooter.container .content {
         height: 700px;
         flex-direction: column;
     }
+}
+
+/**************
+Plugins
+**************/
+.rc-anchor {
+    display: none !important;
 }
