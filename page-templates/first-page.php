@@ -21,9 +21,18 @@ get_header(); ?>
             <?php query_posts('posts_per_page=2&offset=0'); ?>
             <?php while (have_posts()) : the_post(); ?>
                 <div class="news_article">
-                    <span class="date"><?php echo the_date(); ?></span>
-                    <h3><?php the_title(); ?></h3>
-                    <?php the_excerpt(); ?>
+                    <div class="news_article_container">
+                        <?php
+                        if (has_post_thumbnail()) {
+                        ?>
+                            <div class="image" style="background-image: url(<?php echo get_the_post_thumbnail_url(null, 'medium'); ?>)"></div>
+                        <?php } ?>
+                        <div class="text">
+                            <span class="date"><?php echo the_date(); ?></span>
+                            <h3><?php the_title(); ?></h3>
+                            <?php the_excerpt(); ?>
+                        </div>
+                    </div>
                 </div>
             <?php endwhile; // end of the loop.  
             ?>
