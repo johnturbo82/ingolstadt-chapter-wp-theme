@@ -153,6 +153,14 @@ Top bar
     font-size: 90%;
 }
 
+.topbar.container span {
+    float: left;
+    color: var(--text-black);
+    margin: 8px 0 0 90px;
+    text-transform: uppercase;
+    font-size: 75%;
+}
+
 .topbar.container ul {
     margin: 0;
     padding: 4px 0 0 0;
@@ -163,6 +171,8 @@ Top bar
     display: inline-block;
     margin: 0;
     padding: 0;
+    text-transform: uppercase;
+    font-size: 75%;
 }
 
 .topbar.container ul li+li {
@@ -635,6 +645,13 @@ Responsiveness
     .current_page_title {
         display: none;
     }
+
+    #menu-item-970,
+    #menu-item-971,
+    #menu-item-999,
+    #menu-item-1000 {
+        display: none;
+    }
 }
 
 @media (max-width: 767px) {
@@ -646,6 +663,10 @@ Responsiveness
 
     .hamburger {
         display: block !important;
+    }
+
+    .topbar.container ul {
+        display: none;
     }
 
     .nav {
@@ -660,6 +681,10 @@ Responsiveness
         overflow: hidden;
         transition: all 0.3s ease-in-out;
         transform: scale(0);
+    }
+
+    .navigation.container ul li a {
+        padding: 7px 5px;
     }
 
     .current_page_title {
