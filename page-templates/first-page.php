@@ -30,7 +30,7 @@ get_header(); ?>
                         <div class="text">
                             <span class="date"><?php echo the_date(); ?></span>
                             <h3><?php the_title(); ?></h3>
-                            <?php the_excerpt(); ?>
+                            <?php the_content(); ?>
                         </div>
                     </div>
                 </div>

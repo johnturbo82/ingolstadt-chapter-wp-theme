@@ -9,7 +9,7 @@
     <title><?php bloginfo('name'); ?> | <?php is_front_page() ? bloginfo('description') : wp_title(''); ?></title>
     <link rel="profile" href="http://gmpg.org/xfn/11">
     <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/style.css?v=7">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/style.css?v=11">
     <link rel="shortcut icon" type="image/x-icon" href="<?php echo get_template_directory_uri(); ?>/images/icons/favicon.ico">
     <link rel="icon" type="image/x-icon" href="<?php echo get_template_directory_uri(); ?>/images/icons/favicon.ico">
     <link rel="icon" type="image/gif" href="<?php echo get_template_directory_uri(); ?>/images/icons/favicon.gif">
