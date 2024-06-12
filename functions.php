@@ -60,3 +60,23 @@ function member($atts, $content = null)
     return $output;
 }
 add_shortcode("member", "member");
+
+/**
+ * Add custom post type for Shop
+ */
+
+ function wp_shop_custom_post_type() {
+	register_post_type('shop_product',
+		array(
+			'labels'      => array(
+				'name'          => __( 'Shopartikel', 'textdomain' ),
+				'singular_name' => __( 'Shopartikel', 'textdomain' ),
+			),
+			'public'      => true,
+			'has_archive' => true,
+			'rewrite'     => array( 'slug' => 'shopartikel' ),
+		)
+	);
+}
+add_action('init', 'wp_shop_custom_post_type');
+

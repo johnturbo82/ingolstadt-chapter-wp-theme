@@ -52,6 +52,7 @@ body {
     background-color: var(--grey-dark);
     color: var(--grey-mid);
     font-family: 'Nunito', sans-serif;
+    font-size: 100%;
 }
 
 div {
@@ -353,6 +354,10 @@ Header
     background-image: url(../images/header/dealer_store.webp);
 }
 
+.header.container.membershop {
+    background-image: url(../images/header/shop.webp);
+}
+
 .header.container.bavarian-2-days-2025 {
     background-image: url(../images/header/b2d.webp);
 }
@@ -573,6 +578,84 @@ Content
 
 .maincontent.container .content .news_article span.date {
     font-size: 85%;
+}
+
+/**************
+Shop
+**************/
+
+article {
+    width: 100%;
+    background-color: var(--grey-darkmid);
+    margin: 10px 0;
+    border-radius: 4px;
+    padding: 15px;
+    position: relative;
+}
+
+article h2 {
+    margin-top: 0;
+}
+
+article img {
+    max-height: 200px;
+    background-color: var(--text-highlight);
+    padding: 8px;
+    border-radius: 5px;
+}
+
+article a + a {
+    margin-left: 10px;
+}
+
+article div.price {
+    font-size: 20px;
+    width: 100%;
+    text-align: right;
+}
+
+article div.sold-out {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-10deg);
+    border: 3px solid var(--grey-light);
+    background-color: var(--chapter-red);
+    color: var(--grey-light);
+    font-size: 40px;
+    width: 80%;
+    padding: 10px;
+    text-align: center;
+    -moz-hyphens: auto;
+    -o-hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto; 
+    opacity: 0.7;
+}
+
+.cat_container {
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+    height: 100%;
+}
+
+span.shoplabel {
+    padding: 3px 5px;
+    border-radius: 3px;
+    background-color: var(--text-black);
+    color: var(--chapter-gold);
+    border: 1px solid var(--chapter-gold);
+    cursor: pointer;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+span.shoplabel.active {
+    background-color: #b3a154;
+    color: var(--text-black);
 }
 
 /**************
