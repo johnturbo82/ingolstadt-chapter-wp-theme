@@ -21,7 +21,7 @@
         </div>
         <div class="postfooter container">
             <div class="content text">
-                &copy; Ingolstadt Chapter 2017 - <?php echo date("Y"); ?>
+                &copy; H.O.G. Ingolstadt Chapter Germany e.V. <?php echo date("Y"); ?>
                 <span class="right"><a href="mailto:webmaster@ingolstadt-chapter.de">webmaster@ingolstadt-chapter.de</a></span>
             </div>
         </div>

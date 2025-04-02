@@ -28,7 +28,7 @@ get_header(); ?>
                             <div class="image" style="background-image: url(<?php echo get_the_post_thumbnail_url(null, 'medium'); ?>)"></div>
                         <?php } ?>
                         <div class="text">
-                            <span class="date"><?php echo the_date(); ?></span>
+                            <!-- <span class="date"><?php echo the_date(); ?></span> -->
                             <h3><?php the_title(); ?></h3>
                             <?php the_content(); ?>
                         </div>
