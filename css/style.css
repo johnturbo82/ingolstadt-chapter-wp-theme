@@ -580,6 +580,29 @@ Content
     font-size: 85%;
 }
 
+.maincontent.container .content .sponsors {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    width: 100%;
+}
+
+.maincontent.container .content .sponsors .sponsor {
+    background-color: #fff;
+    padding: 12px;
+    border: 3px solid var(--chapter-blue);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-height: 200px;
+}
+
+.maincontent.container .content .sponsors .sponsor img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
 /**************
 Shop
 **************/
@@ -867,6 +890,10 @@ Responsiveness
     .maincontent.container .content .news {
         flex-wrap: wrap;
         flex-direction: column;
+    }
+
+    .maincontent.container .content .sponsors {
+        grid-template-columns: repeat(1, 1fr);
     }
 
     .prefooter.container .content {
