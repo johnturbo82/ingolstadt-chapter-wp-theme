@@ -595,7 +595,7 @@ Content
     display: flex;
     align-items: center;
     justify-content: center;
-    max-height: 200px;
+    height: 200px;
 }
 
 .maincontent.container .content .sponsors .sponsor img {
