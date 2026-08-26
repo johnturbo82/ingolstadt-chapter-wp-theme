@@ -27,11 +27,11 @@ get_header(); ?>
                         ?>
                             <div class="image" style="background-image: url(<?php echo get_the_post_thumbnail_url(null, 'medium'); ?>)"></div>
                         <?php } ?>
-                        <div class="text">
-                            <!-- <span class="date"><?php echo the_date(); ?></span> -->
+                        <a class="text" href="<?php the_permalink(); ?>">
+                            <span class="date"><?php echo the_date(); ?></span>
                             <h3><?php the_title(); ?></h3>
-                            <?php the_content(); ?>
-                        </div>
+                            <?php the_content(""); ?>
+                        </a>
                     </div>
                 </div>
             <?php endwhile; // end of the loop.  
