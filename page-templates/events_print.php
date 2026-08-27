@@ -9,16 +9,18 @@ if (isset($_GET['event_year'])) {
     $year = filter_input(INPUT_GET, "event_year", FILTER_SANITIZE_NUMBER_INT);
 }
 
-function get_events($year)
-{
-    define("ACCESS_TOKEN", "AIzaSyDqsTl72h4ZZyA8aU4wLXydf5jfuwHkrGU");
-    define("CALENDAR_ID", "oll16805qsf7tfnpbac6oaen6s%40group.calendar.google.com");
+// Werden im Custom-Fields-Panel der jeweiligen Seite gepflegt.
+$page_id = get_queried_object_id();
+$google_access_token = get_post_meta($page_id, 'google_calendar_access_token', true);
+$google_calendar_id = get_post_meta($page_id, 'google_calendar_id', true);
 
+function get_events($year, $access_token, $calendar_id)
+{
     $year_to = $year;
     $year_links = "<a href='" . esc_url(add_query_arg('event_year', ($year - 1))) . "'>&laquo;&nbsp;" . ($year - 1) . "</a>&nbsp;|&nbsp;<b>" . $year . "</b>&nbsp;|&nbsp;";
     $year_links .= "<a href='" . esc_url(add_query_arg('event_year', ($year + 1))) . "'>" . ($year + 1) . "&nbsp;&raquo;</a>";
     $year_links .= "<h1>" . $year . "</h1>";
-    $json_url = "https://www.googleapis.com/calendar/v3/calendars/" . CALENDAR_ID . "/events?key=" . ACCESS_TOKEN . "&timeMin=" . $year . "-01-01T00:00:00Z&timeMax=" . $year_to . "-12-31T23:59:59Z&orderBy=startTime&singleEvents=true";
+    $json_url = "https://www.googleapis.com/calendar/v3/calendars/" . rawurlencode($calendar_id) . "/events?key=" . rawurlencode($access_token) . "&timeMin=" . $year . "-01-01T00:00:00Z&timeMax=" . $year_to . "-12-31T23:59:59Z&orderBy=startTime&singleEvents=true";
     $json = file_get_contents($json_url);
     return json_decode($json);
 }
@@ -102,7 +104,7 @@ $month = [
 <table>
 <?php
 $current_month = 0;
-foreach (get_events($year)->items as $event) {
+foreach (get_events($year, $google_access_token, $google_calendar_id)->items as $event) {
     if ($event->visibility == "private") {
         continue;
     }

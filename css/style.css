@@ -113,6 +113,31 @@ label {
     color: var(--text-highlight);
 }
 
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    display: block;
+    width: 100%;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--grey-darkmid);
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23b3a154' d='M4 6l4 4 4-4z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    padding: 8px 45px 8px 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 100%;
+    color: var(--text-highlight);
+    cursor: pointer;
+}
+
+select:hover,
+select:focus {
+    color: var(--chapter-gold);
+    outline: none;
+}
+
 /**************
 General classes
 **************/
