@@ -59,7 +59,7 @@
             <a class="homebutton" href="<?php echo get_home_url() ?>">
                 <img class="small_logo" src="<?php echo get_template_directory_uri(); ?>/images/logo/Ingolstadt_Chapter.svg" alt="Ingolstadt Chapter" />
             </a>
-            <div class="current_page_title"><?php the_title(); ?></div>
+            <div class="current_page_title"><?php echo (strlen(get_the_title()) > 20) ? substr(get_the_title(), 0, 20) . '...' : get_the_title(); ?></div>
             <input id="menu_toggle" type="checkbox"></input>
             <label for="menu_toggle" class="hamburger">
                 <div class="top-bun"></div>
