@@ -1,5 +1,11 @@
 <?php
 
+function theme_setup()
+{
+    add_theme_support('post-thumbnails');
+}
+add_action('after_setup_theme', 'theme_setup');
+
 /**
  * Add navigation menus.
  */
@@ -137,4 +143,3 @@ function events_print_calendar_meta_box_save($post_id)
     }
 }
 add_action('save_post_page', 'events_print_calendar_meta_box_save');
-

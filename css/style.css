@@ -554,6 +554,21 @@ Content
     width: 100%;
 }
 
+.maincontent.container .content .first-page-news {
+    flex-direction: column;
+}
+
+.maincontent.container .content .first-page-news .news_article {
+    flex: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.maincontent.container .content .news-more-link {
+    display: inline-block;
+    margin-top: 15px;
+}
+
 .maincontent.container .content .blog-overview-list {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
@@ -563,8 +578,14 @@ Content
 
 .maincontent.container .content .blog-overview-list .news_article {
     min-width: 0;
-    margin: 5px 0;
-    border-width: 1px;
+    margin: 0;
+    padding: 12px 0;
+    background-color: transparent;
+    border: none;
+}
+
+.maincontent.container .content .blog-overview-list .news_article:not(:last-child) {
+    border-bottom: 1px solid var(--grey-darkmid);
 }
 
 .maincontent.container .content .blog-overview-list .image {
@@ -635,6 +656,16 @@ Content
 
 .maincontent.container .content .news_article span.date {
     font-size: 85%;
+}
+
+.maincontent.container .content .single-featured-image {
+    display: block;
+    width: 100%;
+    height: 300px;
+    max-height: 300px;
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 .maincontent.container .content .sponsors {
@@ -947,6 +978,22 @@ Responsiveness
     .maincontent.container .content .news {
         flex-wrap: wrap;
         flex-direction: column;
+    }
+
+    .maincontent.container .content .first-page-news .news_article .news_article_container {
+        flex-direction: column;
+    }
+
+    .maincontent.container .content .first-page-news .news_article .news_article_container .image {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9;
+        flex: none;
+    }
+
+    .maincontent.container .content .first-page-news .news_article .news_article_container .text {
+        width: 100%;
+        flex: none;
     }
 
     .maincontent.container .content .blog-overview-list {

@@ -17,7 +17,7 @@ get_header(); ?>
     <div class="content text">
         <?php the_content(); ?>
         <h2>News</h2>
-        <div class="news">
+        <div class="news first-page-news">
             <?php query_posts('posts_per_page=2&offset=0'); ?>
             <?php while (have_posts()) : the_post(); ?>
                 <div class="news_article">
@@ -25,7 +25,7 @@ get_header(); ?>
                         <?php
                         if (has_post_thumbnail()) {
                         ?>
-                            <div class="image" style="background-image: url(<?php echo get_the_post_thumbnail_url(null, 'medium'); ?>)"></div>
+                            <div class="image" style="background-image: url(<?php echo get_the_post_thumbnail_url(null, 'large'); ?>)"></div>
                         <?php } ?>
                         <a class="text" href="<?php the_permalink(); ?>">
                             <span class="date"><?php echo the_date(); ?></span>
@@ -37,6 +37,7 @@ get_header(); ?>
             <?php endwhile; // end of the loop.  
             ?>
         </div>
+        <a class="news-more-link" href="<?php echo esc_url(home_url('/news/')); ?>">Weitere News...</a>
     </div>
     <?php
     $get_children_array = get_children(array('post_parent' => 10, 'post_type' => 'page'));
