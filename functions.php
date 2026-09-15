@@ -143,3 +143,21 @@ function events_print_calendar_meta_box_save($post_id)
     }
 }
 add_action('save_post_page', 'events_print_calendar_meta_box_save');
+
+
+add_action('admin_init', 'restrict_specific_user_from_admin');
+
+function restrict_specific_user_from_admin() {
+    // Prüfen, ob eine AJAX-Anfrage vorliegt (wichtig, damit Frontend-Funktionen nicht brechen)
+    if (defined('DOING_AJAX') && DOING_AJAX) {
+        return;
+    }
+
+    $current_user = wp_get_current_user();
+
+    // Option A: Abfrage nach Benutzernamen
+    if ($current_user->user_login === 'atchy') {
+        wp_redirect(home_url());
+        exit;
+    }
+}

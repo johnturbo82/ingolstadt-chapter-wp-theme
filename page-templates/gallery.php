@@ -43,6 +43,13 @@ get_header(); ?>
                 <?php echo apply_filters('the_content', $selected_gallery->post_content); ?>
             </div>
         <?php endif; ?>
+        <?php if ($gallery_children) : ?>
+            <select class="gallery-select gallery-select-bottom" onchange="if (this.value) { window.location.href = this.value; }">
+                <?php foreach ($gallery_children as $child) : ?>
+                    <option value="<?php echo esc_url(get_permalink($child->ID)); ?>" <?php selected($child->ID, $selected_gallery->ID); ?>><?php echo esc_html(get_the_date('', $child->ID)); ?> &ndash; <?php echo esc_html($child->post_title); ?></option>
+                <?php endforeach; ?>
+            </select>
+        <?php endif; ?>
     </div>
 </div>
 
