@@ -18,33 +18,38 @@ get_header(); ?>
         <?php the_content(); ?>
         <h2>News</h2>
         <div class="news first-page-news">
-            <?php query_posts('posts_per_page=2&offset=0'); ?>
-            <?php while (have_posts()) : the_post(); ?>
+                <?php
+                $latest_posts = new WP_Query(array(
+                    'post_type' => 'post',
+                    'post_status' => 'publish',
+                    'posts_per_page' => 2,
+                ));
+                while ($latest_posts->have_posts()) : $latest_posts->the_post();
+                ?>
                 <div class="news_article">
                     <div class="news_article_container">
                         <?php
                         if (has_post_thumbnail()) {
                         ?>
-                            <div class="image" style="background-image: url(<?php echo get_the_post_thumbnail_url(null, 'large'); ?>)"></div>
+                                <div class="image" style="background-image: url('<?php echo esc_url(get_the_post_thumbnail_url(null, 'large')); ?>')"></div>
                         <?php } ?>
                         <a class="text" href="<?php the_permalink(); ?>">
-                            <span class="date"><?php echo the_date(); ?></span>
+                            <span class="date"><?php echo esc_html(get_the_date()); ?></span>
                             <h3><?php the_title(); ?></h3>
                             <?php the_content(""); ?>
                         </a>
                     </div>
                 </div>
-            <?php endwhile; // end of the loop.  
-            ?>
+                <?php endwhile; wp_reset_postdata(); ?>
         </div>
         <a class="news-more-link" href="<?php echo esc_url(home_url('/news/')); ?>">Weitere News...</a>
     </div>
     <?php
     $get_children_array = get_children(array('post_parent' => 10, 'post_type' => 'page'));
     foreach ($get_children_array as $child_page) {
-        echo '<div class="wide_content ' . $child_page->post_name . '"></div>';
+            echo '<div class="wide_content ' . esc_attr($child_page->post_name) . '"></div>';
         echo '<div class="content text">';
-        echo '<h1>' . $child_page->post_title . '</h1>';
+            echo '<h1>' . esc_html($child_page->post_title) . '</h1>';
         echo str_replace(']]>', ']]&gt;', apply_filters('the_content', $child_page->post_content));
         echo '</div>';
     }

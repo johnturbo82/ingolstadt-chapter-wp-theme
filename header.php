@@ -6,10 +6,8 @@
     <meta name="viewport" content="width=device-width">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Ingolstadt Chapter">
-    <title><?php bloginfo('name'); ?> | <?php is_front_page() ? bloginfo('description') : wp_title(''); ?></title>
     <link rel="profile" href="http://gmpg.org/xfn/11">
     <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/style.css?v=<?php echo filemtime("./wp-content/themes/ingolstadt-chapter/css/style.css"); ?>">
     <link rel="shortcut icon" type="image/x-icon" href="<?php echo get_template_directory_uri(); ?>/images/icons/favicon.ico">
     <link rel="icon" type="image/x-icon" href="<?php echo get_template_directory_uri(); ?>/images/icons/favicon.ico">
     <link rel="icon" type="image/gif" href="<?php echo get_template_directory_uri(); ?>/images/icons/favicon.gif">
@@ -48,26 +46,28 @@
 </head>
 
 <body <?php body_class(); ?>>
+    <?php wp_body_open(); ?>
+    <a class="screen-reader-text" href="#main-content">Zum Inhalt springen</a>
     <div class="topbar container">
         <div class="content">
             <span>Official H.O.G. Chapter #8547</span>
-            <?php wp_nav_menu(array('menu' => 'Pflichtangaben')) ?>
+            <?php wp_nav_menu(array('theme_location' => 'top-menu', 'fallback_cb' => false)) ?>
         </div>
     </div>
     <div class="navigation container">
         <div class="content">
-            <a class="homebutton" href="<?php echo get_home_url() ?>">
+            <a class="homebutton" href="<?php echo esc_url(home_url('/')); ?>">
                 <img class="small_logo" src="<?php echo get_template_directory_uri(); ?>/images/logo/Ingolstadt_Chapter.svg" alt="Ingolstadt Chapter" />
             </a>
-            <div class="current_page_title"><?php echo (strlen(get_the_title()) > 20) ? substr(get_the_title(), 0, 20) . '...' : get_the_title(); ?></div>
-            <input id="menu_toggle" type="checkbox"></input>
-            <label for="menu_toggle" class="hamburger">
+            <div class="current_page_title"><?php echo esc_html(wp_html_excerpt(wp_strip_all_tags(get_the_title()), 20, '...')); ?></div>
+            <input id="menu_toggle" type="checkbox" aria-controls="site-navigation">
+            <label for="menu_toggle" class="hamburger" aria-label="Menü öffnen oder schließen">
                 <div class="top-bun"></div>
                 <div class="meat"></div>
                 <div class="bottom-bun"></div>
             </label>
-            <div class="nav">
-                <?php wp_nav_menu(array('menu' => 'Hauptmenü', 'container_class' => 'mainmenu')) ?>
+            <div id="site-navigation" class="nav">
+                <?php wp_nav_menu(array('theme_location' => 'main-menu', 'container_class' => 'mainmenu')) ?>
             </div>
         </div>
     </div>

@@ -3,18 +3,31 @@
 function theme_setup()
 {
     add_theme_support('post-thumbnails');
+    add_theme_support('title-tag');
+    add_theme_support('html5', array('search-form', 'comment-form', 'comment-list', 'gallery', 'caption', 'style', 'script'));
+    add_theme_support('responsive-embeds');
+    add_theme_support('automatic-feed-links');
+
+    register_nav_menus(
+        array(
+            'main-menu' => __('Hauptmenü', 'ingolstadt-chapter'),
+            'top-menu' => __('Topbar', 'ingolstadt-chapter'),
+        )
+    );
 }
 add_action('after_setup_theme', 'theme_setup');
 
-/**
- * Add navigation menus.
- */
-register_nav_menus(
-    array(
-        'main-menu' => __('Hauptmenü'),
-        'top-menu' => __('Topbar')
-    )
-);
+function theme_enqueue_styles()
+{
+    $stylesheet = get_template_directory() . '/css/style.css';
+    wp_enqueue_style(
+        'ingolstadt-chapter-style',
+        get_template_directory_uri() . '/css/style.css',
+        array(),
+        file_exists($stylesheet) ? filemtime($stylesheet) : null
+    );
+}
+add_action('wp_enqueue_scripts', 'theme_enqueue_styles');
 
 /**
  * Add a footer widget area.
@@ -38,29 +51,30 @@ add_action('widgets_init', 'footer_widget_area_init');
  */
 function member($atts, $content = null)
 {
-    if (str_contains($atts['officer'], " ")) {
-        $officers = explode(" ", $atts['officer']);
-    } else {
-        $officers = array($atts['officer']);
-    }
+    $atts = shortcode_atts(array(
+        'officer' => '',
+        'id' => '',
+        'mail' => '',
+        'image' => '',
+    ), $atts, 'member');
+    $officers = preg_split('/\s+/', trim($atts['officer']), -1, PREG_SPLIT_NO_EMPTY);
     $name = trim($content);
-    $output = '';
-    if (isset($atts['id'])) {
-        $output .= '<div id="' .  $atts['id'] . '" class="member">';
-    } else {
-        $output .= '<div class="member">';
-    }
+    $output = '<div' . ($atts['id'] !== '' ? ' id="' . esc_attr($atts['id']) . '"' : '') . ' class="member">';
     $output .= '<div class="name">';
-    $output .= '<h3>' . $name . '</h3>';
-    if (isset($atts['mail'])) {
-        $output .= '<p><a href="mailto:' . $atts['mail'] . '">' . $atts['mail'] . '</a></p>';
+    $output .= '<h3>' . esc_html($name) . '</h3>';
+    if ($atts['mail'] !== '') {
+        $output .= '<p><a href="mailto:' . esc_attr(sanitize_email($atts['mail'])) . '">' . esc_html($atts['mail']) . '</a></p>';
     }
     foreach ($officers as $officer) {
-        $output .= '<div class="patch ' . trim($officer) . '"></div>';
+        $output .= '<div class="patch ' . esc_attr($officer) . '"></div>';
     }
     $output .= '</div>';
     $output .= '<div class="image">';
-    $output .= '<img src="' . $atts['image'] . '" alt="' . $name . '"/>';
+    if ($atts['image'] !== '') {
+        $output .= '<img src="' . esc_url($atts['image']) . '" alt="' . esc_attr($name) . '" />';
+    } else {
+        $output .= '<span class="member-image-placeholder"></span>';
+    }
     $output .= '</div>';
     $output .= '</div>';
     return $output;
@@ -80,6 +94,9 @@ add_shortcode("member", "member");
 			),
 			'public'      => true,
 			'has_archive' => true,
+            'show_in_rest' => true,
+            'supports' => array('title', 'editor', 'thumbnail'),
+            'menu_icon' => 'dashicons-cart',
 			'rewrite'     => array( 'slug' => 'shopartikel' ),
 		)
 	);
@@ -125,7 +142,7 @@ function events_print_calendar_meta_box_render($post)
 
 function events_print_calendar_meta_box_save($post_id)
 {
-    if (!isset($_POST['events_print_calendar_nonce']) || !wp_verify_nonce($_POST['events_print_calendar_nonce'], 'events_print_calendar_save')) {
+    if (!isset($_POST['events_print_calendar_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['events_print_calendar_nonce'])), 'events_print_calendar_save')) {
         return;
     }
     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
@@ -136,10 +153,10 @@ function events_print_calendar_meta_box_save($post_id)
     }
 
     if (isset($_POST['google_calendar_access_token'])) {
-        update_post_meta($post_id, 'google_calendar_access_token', sanitize_text_field($_POST['google_calendar_access_token']));
+        update_post_meta($post_id, 'google_calendar_access_token', sanitize_text_field(wp_unslash($_POST['google_calendar_access_token'])));
     }
     if (isset($_POST['google_calendar_id'])) {
-        update_post_meta($post_id, 'google_calendar_id', sanitize_text_field($_POST['google_calendar_id']));
+        update_post_meta($post_id, 'google_calendar_id', sanitize_text_field(wp_unslash($_POST['google_calendar_id'])));
     }
 }
 add_action('save_post_page', 'events_print_calendar_meta_box_save');

@@ -19,9 +19,6 @@ get_header(); ?>
             <?php the_content(); ?>
         <?php endwhile; ?>
         <?php
-        global $post;
-        get_header();
-
         if (!post_password_required($post)) {
             $articles = get_posts([
                 'post_type' => 'shop_product',
@@ -32,30 +29,33 @@ get_header(); ?>
             $article_string = "";
             $categories = array();
             foreach ($articles as $article) {
-                foreach (get_field('shopkategorie', $article->ID) as $cat) {
+                $article_categories = (array) get_field('shopkategorie', $article->ID);
+                foreach ($article_categories as $cat) {
                     if (!in_array($cat, $categories)) {
                         $categories[] = $cat;
                     }
                 }
-                $article_string .= "<article class='" . implode(" ", get_field('shopkategorie', $article->ID)) . "'>";
+                $article_string .= "<article class='" . esc_attr(implode(" ", $article_categories)) . "'>";
                 if (get_field('ausverkauft', $article->ID)) {
                     $article_string .= "<div class='sold-out'>AUSVERKAUFT</div>";
                 }
-                $article_string .= "<h2>" . $article->post_title . "</h2>";
-                $article_string .= "<p>" . $article->post_content . "</p>";
+                $article_string .= "<h2>" . esc_html($article->post_title) . "</h2>";
+                $article_string .= "<p>" . wp_kses_post($article->post_content) . "</p>";
                 if (get_field('artikelbild_1', $article->ID) != "") {
-                    $article_string .= "<a href='" . get_field('artikelbild_1', $article->ID) . "' class='gallery'><img src='" . get_field('artikelbild_1', $article->ID) . "' alt='" . $article->post_title . " 1' /></a>";
+                    $image_url = get_field('artikelbild_1', $article->ID);
+                    $article_string .= "<a href='" . esc_url($image_url) . "' class='gallery'><img src='" . esc_url($image_url) . "' alt='" . esc_attr($article->post_title . " 1") . "' /></a>";
                 }
                 if (get_field('artikelbild_2', $article->ID) != "") {
-                    $article_string .= "<a href='" . get_field('artikelbild_2', $article->ID) . "' class='gallery'><img src='" . get_field('artikelbild_2', $article->ID) . "' alt='" . $article->post_title . " 1' /></a>";
+                    $image_url = get_field('artikelbild_2', $article->ID);
+                    $article_string .= "<a href='" . esc_url($image_url) . "' class='gallery'><img src='" . esc_url($image_url) . "' alt='" . esc_attr($article->post_title . " 2") . "' /></a>";
                 }
-                $article_string .= "<div class='price'>" . get_field('preis', $article->ID) . " Euro</div>";
+                $article_string .= "<div class='price'>" . esc_html(get_field('preis', $article->ID)) . " Euro</div>";
                 $article_string .= "</article>";
             }
             echo "<div class='cat_container'>";
             echo "<span onclick='resetCats(this)' class='shoplabel active'>Alle&nbsp;Kategorien</span>";
             foreach ($categories as $cat) {
-                echo "<span onclick='showCats(this)' class='shoplabel'>" . $cat . "</span>";
+                echo "<span onclick='showCats(this)' class='shoplabel'>" . esc_html($cat) . "</span>";
             }
 
             echo "</div>";

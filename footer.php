@@ -13,15 +13,15 @@
                     </ul>
                 <?php } ?>
                 <div class="link_icons">
-                    <a title="Facebook" href="https://www.facebook.com/groups/351111465258474/" target="_blank" class="icon facebook"></a>
-                    <a title="Instagram" href="https://www.instagram.com/hog_ingolstadt_chapter/" target="_blank" class="icon instagram"></a>
-                    <a title="Sponsoring Dealer" href="https://hd-ingolstadt.com/" target="_blank" class="icon dealer"></a>
+                    <a title="Facebook" aria-label="Facebook" href="https://www.facebook.com/groups/351111465258474/" target="_blank" rel="noopener noreferrer" class="icon facebook"></a>
+                    <a title="Instagram" aria-label="Instagram" href="https://www.instagram.com/hog_ingolstadt_chapter/" target="_blank" rel="noopener noreferrer" class="icon instagram"></a>
+                    <a title="Sponsoring Dealer" aria-label="Sponsoring Dealer" href="https://hd-ingolstadt.com/" target="_blank" rel="noopener noreferrer" class="icon dealer"></a>
                 </div>
             </div>
         </div>
         <div class="postfooter container">
             <div class="content text">
-                &copy; H.O.G. Ingolstadt Chapter Germany e.V. <?php echo date("Y"); ?>
+                &copy; H.O.G. Ingolstadt Chapter Germany e.V. <?php echo esc_html(wp_date('Y')); ?>
                 <span class="right"><a href="mailto:webmaster@ingolstadt-chapter.de">webmaster@ingolstadt-chapter.de</a></span>
             </div>
         </div>

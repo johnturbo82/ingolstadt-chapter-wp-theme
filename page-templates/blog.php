@@ -14,13 +14,22 @@ get_header(); ?>
 </div>
 <div class="maincontent container">
     <div class="content text">
-        <h1><?php the_title(); ?></h1>
+        <div class="blog-toolbar">
+            <h1><?php the_title(); ?></h1>
+            <form class="blog-search" method="get" action="<?php echo esc_url(get_permalink()); ?>">
+                <label class="screen-reader-text" for="blog-search-input">News durchsuchen</label>
+                <input id="blog-search-input" type="search" name="news_search" value="<?php echo esc_attr(isset($_GET['news_search']) ? sanitize_text_field(wp_unslash($_GET['news_search'])) : ''); ?>" placeholder="News durchsuchen">
+                <button type="submit">Suchen</button>
+            </form>
+        </div>
         <?php
+        $news_search = isset($_GET['news_search']) ? sanitize_text_field(wp_unslash($_GET['news_search'])) : '';
         $blog_query = new WP_Query(array(
             'post_type' => 'post',
             'post_status' => 'publish',
             'posts_per_page' => 10,
             'paged' => max(1, get_query_var('paged')),
+            's' => $news_search,
         ));
         ?>
         <?php if ($blog_query->have_posts()) : ?>
@@ -44,6 +53,7 @@ get_header(); ?>
             echo paginate_links(array(
                 'total' => $blog_query->max_num_pages,
                 'current' => max(1, get_query_var('paged')),
+                'add_args' => $news_search !== '' ? array('news_search' => $news_search) : array(),
             ));
             ?>
         <?php else : ?>
