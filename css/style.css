@@ -480,10 +480,42 @@ Header
     padding: 0 1rem;
 }
 
+.header.container:not(.first-page) .title {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    text-align: center;
+    padding: 0 1rem;
+    position: absolute;
+    bottom: 10px;
+}
+
 .header.container .title h1 {
     margin-bottom: 0;
     overflow-wrap: anywhere;
     hyphens: auto;
+}
+
+.header.container:not(.first-page) .title h1 {
+    display: inline-block;
+    max-width: min(100%, 42rem);
+    width: auto;
+    margin: 0 auto;
+    padding: 0;
+    background: transparent;
+    color: var(--text-highlight);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: clamp(0.95rem, 1.6vw, 1.55rem);
+    line-height: 1.15;
+    font-weight: 700;
+    text-shadow: 0 0 16px rgba(0, 0, 0, 0.95), 0 0 28px rgba(0, 0, 0, 0.8), 0 0 42px rgba(0, 0, 0, 0.7);
+    box-sizing: border-box;
+    transform: none;
+    border: none;
+    font-family: 'Nunito', sans-serif;
 }
 
 .header.container.first-page .title h1 {
