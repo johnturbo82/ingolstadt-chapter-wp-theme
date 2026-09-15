@@ -366,10 +366,11 @@ Animations
 Header
 **************/
 .header.container.first-page {
+    position: relative;
     height: calc(100vh - 70px);
     background-color: var(--grey-light);
     z-index: 1;
-    background-image: url(../images/header/InChap_riding.webp);
+    background-image: linear-gradient(rgba(8, 8, 8, 0.42), rgba(8, 8, 8, 0.62)), url(../images/header/InChap_riding.webp);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -417,10 +418,14 @@ Header
 
 .header.container.first-page .content {
     position: relative;
-    top: 35%;
+    top: 52%;
     height: auto;
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding-bottom: 0;
+    z-index: 2;
+    transform: translateY(-50%);
 }
 
 .header.container.bavarian-2-days-2025 .content {
@@ -463,14 +468,54 @@ Header
     overflow-wrap: anywhere;
 }
 
+.header.container.first-page .title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: min(100%, 760px);
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
 .header.container .title h1 {
     margin-bottom: 0;
     overflow-wrap: anywhere;
     hyphens: auto;
 }
 
+.header.container.first-page .title h1 {
+    font-size: clamp(2.4rem, 3.4vw, 4.8rem);
+    line-height: 0.96;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-top: 0.3em;
+    font-weight: 700;
+    text-shadow: 0 2px 0 rgba(16, 16, 16, 0.9), 0 8px 24px rgba(0, 0, 0, 0.55);
+}
+
+.header.container.first-page .title h2 {
+    margin-top: 0.5em;
+    font-size: clamp(1.1rem, 1.8vw, 2.2rem);
+    line-height: 1.1;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    max-width: min(100%, 46rem);
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    font-weight: 700;
+    text-shadow: 0 2px 0 rgba(16, 16, 16, 0.9), 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
 .header.container .title img {
     height: 20vh;
+}
+
+.header.container.first-page .title img {
+    height: clamp(120px, 18vh, 220px);
+    width: auto;
+    filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.5));
 }
 
 .header.container .title.b2d img {
