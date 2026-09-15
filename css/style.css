@@ -489,7 +489,7 @@ Header
     padding: 0;
     position: absolute;
     left: 50%;
-    bottom: -3px;
+    bottom: -4px;
     transform: translate(-50%, 50%);
     z-index: 2;
 }
@@ -530,7 +530,7 @@ Header
 
 @media (max-width: 767px) {
     .header.container:not(.first-page) .title {
-        bottom: -3px;
+        bottom: -4px;
         transform: translate(-50%, 50%);
     }
 
