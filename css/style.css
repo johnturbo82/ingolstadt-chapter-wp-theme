@@ -592,11 +592,56 @@ Header
 /**************
 Content
 **************/
+.maincontent.container .officer-filter {
+    margin: 0 0 35px;
+}
+
+.maincontent.container .officer-filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.maincontent.container .officer-filter button {
+    border: 1px solid var(--chapter-gold);
+    border-radius: 3px;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    padding: 8px 12px;
+}
+
+.maincontent.container .officer-filter button.is-active {
+    background: var(--chapter-gold);
+    color: var(--text-black);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .maincontent.container .officer-filter button:hover {
+        background: var(--chapter-gold);
+        color: var(--text-black);
+    }
+}
+
+.maincontent.container .officer-filter button:focus-visible {
+    outline: 2px solid var(--chapter-gold);
+    outline-offset: 2px;
+}
+
 .maincontent.container .member {
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
     margin-bottom: 35px;
+}
+
+.maincontent.container .member[hidden] {
+    display: none !important;
+}
+
+.maincontent.container h2.wp-block-heading[hidden] {
+    display: none !important;
 }
 
 .maincontent.container .member .name {
@@ -625,6 +670,10 @@ Content
 
 .maincontent.container .member .name .patch.director {
     background-image: url(../images/patches/director.svg);
+}
+
+.maincontent.container .member .name .patch.headroadcaptain {
+    background-image: url(../images/patches/headroadcaptain.svg);
 }
 
 .maincontent.container .member .name .patch.ladiesofharleyofficer {

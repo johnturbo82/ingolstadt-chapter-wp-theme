@@ -81,6 +81,120 @@ function member($atts, $content = null)
 }
 add_shortcode("member", "member");
 
+function officer_filter_shortcode()
+{
+    static $instance = 0;
+    $instance++;
+    $filter_id = 'officer-filter-' . $instance;
+
+    $output = '<div id="' . esc_attr($filter_id) . '" class="officer-filter">';
+    $output .= '<div class="officer-filter-buttons" role="group" aria-label="Nach Funktion filtern"></div>';
+    $output .= '</div>';
+    $output .= '<script>
+        function initOfficerFilter() {
+            var filter = document.getElementById(' . wp_json_encode($filter_id) . ');
+            if (!filter) {
+                return;
+            }
+
+            var scope = filter.closest(".content") || document;
+            var members = Array.from(scope.querySelectorAll(".member"));
+            var buttons = filter.querySelector(".officer-filter-buttons");
+            var sections = [];
+            var labels = {
+                activitiesofficer: "Activities Officer",
+                assistantdirector: "Assistant Director",
+                director: "Director",
+                headroadcaptain: "Head Road Captain",
+                ladiesofharleyofficer: "Ladies of Harley Officer",
+                membershipofficer: "Membership Officer",
+                merchandiseofficer: "Merchandise Officer",
+                pastofficer: "Past Officer",
+                photographer: "Photographer",
+                roadcaptain: "Road Captain",
+                safetyofficer: "Safety Officer",
+                secretary: "Secretary",
+                treasurer: "Treasurer",
+                webmaster: "Webmaster"
+            };
+            var officers = new Set();
+
+            members.forEach(function (member) {
+                member.querySelectorAll(".patch").forEach(function (patch) {
+                    patch.classList.forEach(function (className) {
+                        if (className !== "patch") {
+                            officers.add(className);
+                        }
+                    });
+                });
+            });
+
+            Array.from(scope.querySelectorAll("h2.wp-block-heading, .member")).forEach(function (element) {
+                if (element.matches("h2.wp-block-heading")) {
+                    sections.push({
+                        heading: element,
+                        members: []
+                    });
+                } else if (sections.length > 0) {
+                    sections[sections.length - 1].members.push(element);
+                }
+            });
+
+            function getLabel(slug) {
+                if (labels[slug]) {
+                    return labels[slug];
+                }
+                return slug.replace(/([a-z])([A-Z])/g, "$1 $2").replace(/[-_]/g, " ");
+            }
+
+            function applyFilters() {
+                var selectedOfficers = Array.from(buttons.querySelectorAll("button.is-active"))
+                    .map(function (button) {
+                        return button.dataset.officer;
+                    });
+
+                members.forEach(function (member) {
+                    member.hidden = selectedOfficers.length > 0 && !selectedOfficers.some(function (officer) {
+                        return member.querySelector(".patch." + CSS.escape(officer));
+                    });
+                });
+
+                sections.forEach(function (section) {
+                    section.heading.hidden = !section.members.some(function (member) {
+                        return !member.hidden;
+                    });
+                });
+            }
+
+            Array.from(officers).sort().forEach(function (officer) {
+                var button = document.createElement("button");
+                button.type = "button";
+                button.className = "officer-filter-button";
+                button.dataset.officer = officer;
+                button.textContent = getLabel(officer);
+                button.setAttribute("aria-pressed", "false");
+                button.addEventListener("click", function () {
+                    button.classList.toggle("is-active");
+                    button.setAttribute("aria-pressed", button.classList.contains("is-active") ? "true" : "false");
+                    applyFilters();
+                });
+                buttons.appendChild(button);
+            });
+
+            applyFilters();
+        }
+
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", initOfficerFilter);
+        } else {
+            initOfficerFilter();
+        }
+    </script>';
+
+    return $output;
+}
+add_shortcode('officer_filter', 'officer_filter_shortcode');
+
 /**
  * Add custom post type for Shop
  */
