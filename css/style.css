@@ -353,7 +353,7 @@ Hamburger
     position: absolute;
     width: 35px;
     height: 35px;
-    z-index: 5;
+    z-index: 30;
     right: 15px;
     top: 5px;
 }
@@ -374,24 +374,26 @@ Hamburger
 /**************
 Animations
 **************/
-#menu_toggle:checked+.hamburger .top-bun {
+#menu_toggle:checked + .hamburger .top-bun {
     transform: rotate(-45deg);
     margin-top: 18px;
 }
 
-#menu_toggle:checked+.hamburger .bottom-bun {
+#menu_toggle:checked + .hamburger .bottom-bun {
     opacity: 0;
     transform: rotate(45deg);
 }
 
-#menu_toggle:checked+.hamburger .meat {
+#menu_toggle:checked + .hamburger .meat {
     transform: rotate(45deg);
     margin-top: -5px;
 }
 
-#menu_toggle:checked+.hamburger+.nav {
-    top: 0;
-    transform: scale(1);
+#menu_toggle:checked ~ .nav {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
 }
 
 /**************
@@ -1194,16 +1196,18 @@ Responsiveness
 
     .nav {
         position: fixed;
+        inset: 0;
         width: 100%;
         height: 100%;
-        background-color: var(--grey-dark);
-        top: -100%;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        overflow: hidden;
-        transition: all 0.3s ease-in-out;
-        transform: scale(0);
+        background: linear-gradient(180deg, rgba(16, 16, 16, 0.98), rgba(44, 49, 53, 0.98));
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+        transform: translateY(-12px) scale(0.98);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        z-index: 20;
     }
 
     .navigation.container ul li a {
@@ -1221,12 +1225,17 @@ Responsiveness
         overflow: hidden;
         overflow-y: auto;
         height: 100%;
-        padding-top: 30px;
+        padding-top: 86px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
     }
 
     .mainmenu ul.menu {
-        text-align: left;
-        margin-left: 25%;
+        width: 100%;
+        text-align: center;
+        margin: 0;
+        padding: 0;
     }
 
     .mainmenu ul.menu li {
@@ -1241,16 +1250,24 @@ Responsiveness
     .mainmenu ul.menu li a {
         position: relative;
         text-decoration: none;
-        color: var(--chapter-gold);
-        font-size: 3vh;
-        display: inline-block;
-        margin-top: 1vh;
-        transition: color 0.2s ease-in-out;
+        color: var(--grey-light);
+        font-size: clamp(1.2rem, 3vw, 2rem);
+        display: block;
+        margin: 0 auto 1rem;
+        padding: 0.7rem 1rem;
+        transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
         height: inherit;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        border-radius: 8px;
+        width: min(90%, 350px);
+        background: rgba(255, 255, 255, 0.02);
     }
 
     .mainmenu ul.menu li a:hover {
-        color: white;
+        color: var(--text-highlight);
+        background: rgba(179, 161, 84, 0.12);
+        transform: translateY(-1px);
     }
 
     .mainmenu ul.menu li a:hover:before {
