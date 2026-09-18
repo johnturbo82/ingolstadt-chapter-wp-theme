@@ -71,6 +71,10 @@ body {
     padding: 0;
 }
 
+html {
+    scroll-padding-top: 110px;
+}
+
 body {
     margin-top: 70px;
     background-color: var(--grey-dark);
@@ -186,6 +190,24 @@ General classes
 
 .content.text {
     padding: 35px 15px;
+}
+
+.member-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+}
+
+.member-heading-text {
+    flex: 1 1 auto;
+}
+
+.member-anchor {
+    flex: 0 0 auto;
+    margin-left: auto;
+    color: var(--chapter-gold);
 }
 
 .wide_content {

@@ -59,9 +59,28 @@ function member($atts, $content = null)
     ), $atts, 'member');
     $officers = preg_split('/\s+/', trim($atts['officer']), -1, PREG_SPLIT_NO_EMPTY);
     $name = trim($content);
-    $output = '<div' . ($atts['id'] !== '' ? ' id="' . esc_attr($atts['id']) . '"' : '') . ' class="member">';
+    $member_id = trim($atts['id']);
+
+    if ($member_id === '') {
+        $first_officer = !empty($officers) ? sanitize_title($officers[0]) : 'member';
+        $name_slug = sanitize_title($name);
+        $member_id = $first_officer;
+
+        if ($name_slug !== '') {
+            $member_id .= '_' . $name_slug;
+        }
+    }
+
+    if ($member_id === '') {
+        $member_id = 'member-' . wp_unique_id();
+    }
+
+    $current_page_url = get_permalink();
+    $member_anchor_url = $current_page_url !== false ? $current_page_url . '#' . $member_id : '#' . $member_id;
+
+    $output = '<div class="member">';
     $output .= '<div class="name">';
-    $output .= '<h3>' . esc_html($name) . '</h3>';
+    $output .= '<h3 id="' . esc_attr($member_id) . '" class="member-heading"><span class="member-heading-text">' . esc_html($name) . '</span> <a class="member-anchor" href="' . esc_url($member_anchor_url) . '" aria-label="' . esc_attr(sprintf(__('Direktlink zu %s', 'ingolstadt-chapter'), $name)) . '" title="' . esc_attr(sprintf(__('Direktlink zu %s', 'ingolstadt-chapter'), $name)) . '">🔗</a></h3>';
     if ($atts['mail'] !== '') {
         $output .= '<p><a href="mailto:' . esc_attr(sanitize_email($atts['mail'])) . '">' . esc_html($atts['mail']) . '</a></p>';
     }
