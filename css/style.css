@@ -198,6 +198,7 @@ General classes
     justify-content: space-between;
     gap: 12px;
     width: 100%;
+    margin: 0 0 10px 0;
 }
 
 .member-heading-text {
@@ -208,6 +209,15 @@ General classes
     flex: 0 0 auto;
     margin-left: auto;
     color: var(--chapter-gold);
+    font-size: 0.75em;
+    opacity: 0.9;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.member-anchor:hover {
+    opacity: 1;
+    transform: translateY(-1px);
+    text-decoration: none;
 }
 
 .wide_content {
@@ -655,7 +665,12 @@ Content
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
-    margin-bottom: 35px;
+    margin-bottom: 42px;
+    padding: 18px 20px 14px;
+    background: linear-gradient(180deg, rgba(44, 49, 53, 0.95), rgba(16, 16, 16, 0.88));
+    border: 1px solid rgba(179, 161, 84, 0.28);
+    border-radius: 14px;
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .maincontent.container .member[hidden] {
@@ -668,6 +683,7 @@ Content
 
 .maincontent.container .member .name {
     flex: 4;
+    padding-right: 20px;
 }
 
 .maincontent.container .member .name .patch {
@@ -676,6 +692,7 @@ Content
     background-position: center center;
     background-repeat: no-repeat;
     background-size: contain;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.2));
 }
 
 .maincontent.container .member .name .patch+.patch {
@@ -740,11 +757,16 @@ Content
 
 .maincontent.container .member .image {
     flex: 10;
-    padding-left: 25px;
+    padding-left: 20px;
+    border-left: 1px solid rgba(179, 161, 84, 0.18);
+    display: flex;
+    align-items: center;
 }
 
 .maincontent.container .member .image img {
     width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.18);
 }
 
 .maincontent.container .content figure.wp-block-gallery {
