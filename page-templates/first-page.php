@@ -17,7 +17,8 @@ get_header(); ?>
     <div class="content text">
         <?php the_content(); ?>
         <h2>News</h2>
-        <div class="news first-page-news">
+        <section class="news-cards-page first-page-news">
+            <div class="news-card-grid">
                 <?php
                 $latest_posts = new WP_Query(array(
                     'post_type' => 'post',
@@ -25,23 +26,23 @@ get_header(); ?>
                     'posts_per_page' => 2,
                 ));
                 while ($latest_posts->have_posts()) : $latest_posts->the_post();
+                    $news_image_url = has_post_thumbnail() ? get_the_post_thumbnail_url(null, 'large') : wp_get_attachment_image_url(605, 'large');
+                    if (!$news_image_url) {
+                        $news_image_url = 'https://www.ingolstadt-chapter.de/wp-content/uploads/2019/02/Bilder_Videos_Iphone6s-448.jpg';
+                    }
                 ?>
-                <div class="news_article">
-                    <div class="news_article_container">
-                        <?php
-                        if (has_post_thumbnail()) {
-                        ?>
-                                <div class="image" style="background-image: url('<?php echo esc_url(get_the_post_thumbnail_url(null, 'large')); ?>')"></div>
-                        <?php } ?>
-                        <a class="text" href="<?php the_permalink(); ?>">
-                            <span class="date"><?php echo esc_html(get_the_date()); ?></span>
-                            <h3><?php the_title(); ?></h3>
-                            <?php the_content(""); ?>
-                        </a>
-                    </div>
-                </div>
+                    <article class="news-card">
+                        <a class="news-card-image" href="<?php the_permalink(); ?>" aria-label="<?php echo esc_attr(sprintf('%s lesen', get_the_title())); ?>" style="background-image: url('<?php echo esc_url($news_image_url); ?>');"></a>
+                        <div class="news-card-body">
+                            <time class="news-card-date" datetime="<?php echo esc_attr(get_the_date('c')); ?>"><?php echo esc_html(get_the_date()); ?></time>
+                            <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+                            <p class="news-card-excerpt"><?php echo esc_html(wp_trim_words(wp_strip_all_tags(get_the_content()), 28, '...')); ?></p>
+                            <a class="news-card-link" href="<?php the_permalink(); ?>">Artikel lesen</a>
+                        </div>
+                    </article>
                 <?php endwhile; wp_reset_postdata(); ?>
-        </div>
+            </div>
+        </section>
         <a class="news-more-link" href="<?php echo esc_url(home_url('/news/')); ?>">Weitere News...</a>
     </div>
     <?php
